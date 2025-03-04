@@ -1,40 +1,34 @@
-import { getCity } from "./getCity";
-import { getData } from "./getData";
-import { unit } from "./unit";
+import { weatherData } from "./weatherData";
 
-export const todayWeather = async () => {
-  const mainUnit = unit();
-  const city = getCity();
-  const response = await getData(city);
+export const todayWeather = (data: weatherData) => {
+  const unit_C = document.querySelector("#unit_C") as HTMLButtonElement;
+  const unit_F = document.querySelector("#unit_F") as HTMLButtonElement;
   const temp = document.querySelector("#todayTemp") as HTMLElement;
   const rain = document.querySelector("#rainProp") as HTMLElement;
   const wind = document.querySelector("#wind") as HTMLElement;
   const airHumidity = document.querySelector("#airHumidity") as HTMLElement;
   const UVindex = document.querySelector("#UVindex") as HTMLElement;
   try {
-    if (!response) {
-      throw new Error("Failed to fetch data");
-    }
-    const data = await response.json();
-    const newTemp = data.currentConditions.temp;
-    if (mainUnit === "F") {
-      temp.textContent = newTemp + "°F";
-    }
-    if (mainUnit === "C") {
-      const newFromula = (newTemp - 32) * (5 / 9);
-      temp.textContent = newFromula.toFixed(1) + "°C";
-    }
+    const newTemp = data.currentConditions.feelslike;
+    // Default unit for temp
+    const newFromulaTemp = (newTemp - 32) * (5 / 9);
+    temp.textContent = newFromulaTemp.toFixed(1) + "°C";
     rain.textContent = data.currentConditions.precipprob + " %";
     const newwind = data.currentConditions.windspeed;
-    if (mainUnit === "F") {
-      wind.textContent = newwind + " mph";
-    }
-    if (mainUnit === "C") {
-      const newFromula = newwind * 1.60934;
-      wind.textContent = newFromula.toFixed(1) + " kmh";
-    }
+    // Default unit for wind
+    const newFromulaWind = newwind * 1.60934;
+    wind.textContent = newFromulaWind.toFixed(1) + " kmh";
     airHumidity.textContent = data.currentConditions.humidity + " %";
-    UVindex.textContent = data.currentConditions.uvindex;
+    UVindex.textContent = String(data.currentConditions.uvindex);
+
+    unit_F.addEventListener("click", () => {
+      temp.textContent = newTemp + "°F";
+      wind.textContent = newwind + " mph";
+    });
+    unit_C.addEventListener("click", () => {
+      temp.textContent = newFromulaTemp.toFixed(1) + "°C";
+      wind.textContent = newFromulaWind.toFixed(1) + " kmh";
+    });
   } catch (error) {
     console.error(error);
   }

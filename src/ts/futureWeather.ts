@@ -1,12 +1,9 @@
-import { getCity } from "./getCity";
-import { getData } from "./getData";
-import src = require("./../img/sun.png");
-import { unit } from "./unit";
+import { weatherIcon } from "./weatherIcon";
+import { weatherData } from "./weatherData";
 
-export const futureWeather = async () => {
-  const mainUnit = unit();
-  const city = getCity();
-  const response = await getData(city);
+export const futureWeather = (data: weatherData) => {
+  const unit_C = document.querySelector("#unit_C") as HTMLButtonElement;
+  const unit_F = document.querySelector("#unit_F") as HTMLButtonElement;
   const weekDays = [
     "Sunday",
     "Monday",
@@ -18,11 +15,30 @@ export const futureWeather = async () => {
   ];
   const outerContainer = document.querySelector("#container") as HTMLElement;
   try {
-    if (!response) {
-      throw new Error("Failed to fetch data");
-    }
-    const data = await response.json();
-    for (let i = 0; i < 6; i++) {
+    const updateTemperature = (unit: string, index: number) => {
+      const minMaxTemp = document.querySelector(
+        `#minMaxTemp${index}`
+      ) as HTMLElement;
+      if (unit === "F") {
+        minMaxTemp.textContent =
+          data.days[index].tempmax +
+          "°F" +
+          "/" +
+          data.days[index].tempmin +
+          "°F";
+      } else {
+        const newFromulaMin = (data.days[index].tempmin - 32) * (5 / 9);
+        const newFromulaMax = (data.days[index].tempmax - 32) * (5 / 9);
+        minMaxTemp.textContent =
+          newFromulaMax.toFixed(1) +
+          "°C" +
+          "/" +
+          newFromulaMin.toFixed(1) +
+          "°C";
+      }
+    };
+    outerContainer.innerHTML = "";
+    for (let i = 0; i < 7; i++) {
       const innerContainer = document.createElement("div");
       innerContainer.classList.add(
         "flex",
@@ -38,7 +54,7 @@ export const futureWeather = async () => {
       innerContainer.appendChild(day);
 
       const img = document.createElement("img");
-      img.src = String(src);
+      img.src = weatherIcon(data.days[i].conditions);
       innerContainer.appendChild(img);
 
       const condition = document.createElement("div");
@@ -46,20 +62,23 @@ export const futureWeather = async () => {
       condition.textContent = data.days[i].conditions;
       innerContainer.appendChild(condition);
 
-      const description = document.createElement("div");
-      description.classList.add("text-sm", "tracking-wide", "font-semibold");
-      if (mainUnit === "F") {
-        description.textContent =
-          data.days[i].tempmax + "/" + data.days[i].tempmin;
-      }
-      if (mainUnit === "C") {
-        const newFromulaMin = (data.days[i].tempmin - 32) * (5 / 9);
-        const newFromulaMax = ( data.days[i].tempmax - 32) * (5 / 9);
-        description.textContent = newFromulaMax.toFixed(1)+"/"+newFromulaMin.toFixed(1);
-      }
-
-      innerContainer.appendChild(description);
+      const minMaxTemp = document.createElement("div");
+      minMaxTemp.id = `minMaxTemp${i}`;
+      minMaxTemp.classList.add("text-sm", "tracking-wide", "font-semibold");
+      innerContainer.appendChild(minMaxTemp);
+      updateTemperature("C", i);
     }
+
+    unit_F.addEventListener("click", () => {
+      for (let i = 0; i < 7; i++) {
+        updateTemperature("F", i);
+      }
+    });
+    unit_C.addEventListener("click", () => {
+      for (let i = 0; i < 7; i++) {
+        updateTemperature("C", i);
+      }
+    });
   } catch (error) {
     console.error(error);
   }

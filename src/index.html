@@ -12,7 +12,7 @@
       <!-- Top Container -->
       <section class="flex">
         <!-- Left Container -->
-        <div>
+        <div class="w-1/2">
           <!-- Search Box -->
           <form class="flex items-center mb-3">
             <input
@@ -20,8 +20,17 @@
               placeholder="Search..."
               class="p-3 text-xl rounded-md outline-none w-full"
             />
-            <button class="rounded-md bg-white p-3 ml-1" type="submit" id="submit">
-              <img src="svg/magnify.svg" class="h-7 w-7" alt="Search" />
+            <button
+              class="rounded-md bg-white p-3 ml-1"
+              type="submit"
+              id="submit"
+            >
+              <img
+                src="svg/magnify.svg"
+                class="h-7 w-7"
+                alt="Search"
+                id="search"
+              />
             </button>
           </form>
           <!-- Today Weather -->
@@ -29,20 +38,24 @@
             class="bg-gradient-to-t from-blue-600 to-cyan-400 p-3 text-white rounded-md"
           >
             <div class="flex justify-between text-lg font-semibold">
-              <h2 class="text-2xl" id="currentCity">Beirut</h2>
-              <div class="text-2xl" id="currentDate">9:00 PM</div>
+              <h2 class="text-2xl" id="currentCity"></h2>
+              <div class="text-2xl" id="currentDate"></div>
             </div>
             <div class="flex justify-center">
-              <img src="img/sun.png" alt="Sunny" />
+              <img src="img/sun.png" alt="Sunny" id="currentWeather" />
             </div>
-            <div class="flex justify-center text-[3rem] font-semibold" id="currentTemp">
-              14.2°C
-            </div>
-            <div class="flex justify-center text-sm mb-5" id="currentCondition">Partially cloudy</div>
-            <div class="flex justify-center px-10" id="currentDescription">
-              Similar temperatures continuing with a chance of rain Wednesday &
-              Thursday.
-            </div>
+            <div
+              class="flex justify-center text-[3rem] font-semibold"
+              id="currentTemp"
+            ></div>
+            <div
+              class="flex justify-center text-sm mb-5"
+              id="currentCondition"
+            ></div>
+            <div
+              class="flex justify-center px-10 text-center"
+              id="currentDescription"
+            ></div>
           </div>
         </div>
         <!-- Right Container -->
@@ -53,17 +66,14 @@
           <div class="flex justify-between">
             <h2 class="font-semibold text-xl mb-2">Today's weather details</h2>
             <!-- Buttons -->
-            <div class="inline-flex bg-green-100 rounded-full ">
+            <div class="inline-flex bg-green-100 rounded-full">
               <button
-                id="Unit_C"
+                id="unit_C"
                 class="px-6 py-2 rounded-full text-white bg-green-600"
               >
                 C
               </button>
-              <button
-                id="Unit_F"
-                class="px-6 py-2 rounded-full text-green-600"
-              >
+              <button id="unit_F" class="px-6 py-2 rounded-full text-green-600">
                 F
               </button>
             </div>
@@ -80,9 +90,9 @@
                   class="h-10 w-10"
                   alt="Thermometer"
                 />
-                <div class="font-semibold ml-2 text-lg">Thermal Sensation</div>
+                <div class="font-semibold ml-2 text-lg">Feels Like</div>
               </div>
-              <div class="font-semibold text-lg" id="todayTemp">14.2°C</div>
+              <div class="font-semibold text-lg" id="todayTemp"></div>
             </div>
             <!-- Rain Probability -->
             <div
@@ -96,7 +106,7 @@
                 />
                 <div class="font-semibold ml-2 text-lg">Rain Probability</div>
               </div>
-              <div class="font-semibold text-lg" id="rainProp">0%</div>
+              <div class="font-semibold text-lg" id="rainProp"></div>
             </div>
             <!-- Wind Speed -->
             <div
@@ -106,7 +116,7 @@
                 <img src="svg/weather-windy.svg" class="h-10 w-10" alt="Wind" />
                 <div class="font-semibold ml-2 text-lg">Wind Speed</div>
               </div>
-              <div class="font-semibold text-lg" id="wind">2.9 km/h</div>
+              <div class="font-semibold text-lg" id="wind"></div>
             </div>
             <!-- Air Humidity -->
             <div
@@ -120,7 +130,7 @@
                 />
                 <div class="font-semibold ml-2 text-lg">Air Humidity</div>
               </div>
-              <div class="font-semibold text-lg" id="airHumidity">60%</div>
+              <div class="font-semibold text-lg" id="airHumidity"></div>
             </div>
             <!-- UV index -->
             <div
@@ -134,7 +144,7 @@
                 />
                 <div class="font-semibold ml-2 text-lg">UV index</div>
               </div>
-              <div class="font-semibold text-lg" id="UVindex">0</div>
+              <div class="font-semibold text-lg" id="UVindex"></div>
             </div>
           </div>
         </div>
@@ -143,52 +153,9 @@
       <section
         class="mt-5 bg-gradient-to-t from-cyan-600 to-gray-400 rounded-md p-3"
       >
-        <h2 class="font-semibold mb-5 text-xl">Forecast forthe next 7 days</h2>
+        <h2 class="font-semibold mb-5 text-xl">Forecast for the next 7 days</h2>
         <!-- Next 7 days' Weather -->
-        <div class="flex" id="container">
-          <!-- <div class="flex flex-col items-center justify-between">
-            <div class="font-semibold text-xl">Sunday</div>
-            <img src="img/sun.png" alt="Sunny" />
-            <div class="font-semibold mb-2 text-sm">Clear</div>
-            <div class="text-sm tracking-wide font-semibold">18.9/11.7</div>
-          </div>
-          <div class="flex flex-col items-center justify-between">
-            <div class="font-semibold text-xl">Monday</div>
-            <img src="img/muy-nublado.png" alt="Overcast" />
-            <div class="font-semibold mb-2 text-sm">Overcast</div>
-            <div class="text-sm tracking-wide font-semibold">18.8/11.4</div>
-          </div>
-          <div class="flex flex-col items-center justify-between">
-            <div class="font-semibold text-xl">Tuesday</div>
-            <img src="img/muy-nublado.png" alt="Overcast" />
-            <div class="font-semibold mb-2 text-sm">Overcast</div>
-            <div class="text-sm tracking-wide font-semibold">20.3/13.6</div>
-          </div>
-          <div class="flex flex-col items-center justify-between">
-            <div class="font-semibold text-xl">Wednesday</div>
-            <img src="img/rain.png" alt="Rain" />
-            <div class="font-semibold mb-2 text-sm">Rain, Overcast</div>
-            <div class="text-sm tracking-wide font-semibold">20.2/14.4</div>
-          </div>
-          <div class="flex flex-col items-center justify-between">
-            <div class="font-semibold text-xl">Thursday</div>
-            <img src="img/rain-sun.png" alt="Rain, Partially cloudy" />
-            <div class="font-semibold mb-2 text-sm">Rain, Partially cloudy</div>
-            <div class="text-sm tracking-wide font-semibold">19.8/13.9</div>
-          </div>
-          <div class="flex flex-col items-center justify-between">
-            <div class="font-semibold text-xl">Friday</div>
-            <img src="img/rain.png" alt="Rain" />
-            <div class="font-semibold mb-2 text-sm">Rain</div>
-            <div class="text-sm tracking-wide font-semibold">16.8/13.9</div>
-          </div>
-          <div class="flex flex-col items-center justify-between">
-            <div class="font-semibold text-xl">Saturday</div>
-            <img src="img/muy-nublado.png" alt="Partially cloudy" />
-            <div class="font-semibold mb-2 text-sm">Partially cloudy</div>
-            <div class="text-sm tracking-wide font-semibold">17.8/11.9</div>
-          </div> -->
-        </div>
+        <div class="flex" id="container"></div>
       </section>
     </main>
   </body>

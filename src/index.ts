@@ -1,12 +1,6 @@
 import "./styles.css";
-import { currentWeather } from "./ts/currentWeather";
-import { futureWeather } from "./ts/futureWeather";
-import { todayWeather } from "./ts/todayWeather";
-// import { createPara } from "./ts/script";
-// createPara();
-import { unit } from "./ts/unit";
-unit()
-currentWeather();
-todayWeather();
-futureWeather();
+import { getResponse } from "./ts/getResponse";
+import { changeUnit } from "./ts/changeUnit";
+changeUnit();
+getResponse("beirut");
 console.log("hello world");
