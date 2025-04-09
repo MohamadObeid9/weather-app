@@ -6,13 +6,15 @@
     <title>Weather App</title>
   <script defer src="main.js"></script></head>
   <body
-    class="flex justify-center items-center bg-gradient-to-b from-cyan-700 to-cyan-300 h-screen"
+    class="flex justify-center items-center bg-gradient-to-b from-cyan-700 to-cyan-300 min-h-screen"
   >
-    <main class="flex flex-col">
+    <main class="flex flex-col my-3">
       <!-- Top Container -->
-      <section class="flex">
+      <section
+        class="flex flex-col items-center justify-center gap-y-5 md:flex-row md:gap-x-5"
+      >
         <!-- Left Container -->
-        <div class="w-1/2">
+        <div class="w-80 md:w-1/2">
           <!-- Search Box -->
           <form class="flex items-center mb-3">
             <input
@@ -53,33 +55,38 @@
               id="currentCondition"
             ></div>
             <div
-              class="flex justify-center px-10 text-center"
+              class="flex justify-center px-10 text-center text-sm md:text-base"
               id="currentDescription"
             ></div>
           </div>
         </div>
         <!-- Right Container -->
         <div
-          class="bg-gradient-to-b from-green-500 to-blue-500 ml-5 rounded-md p-3 w-[70%]"
+          class="bg-gradient-to-b from-green-500 to-blue-500 md:ml-5 md:w-1/2 rounded-md p-3 w-80"
         >
           <!-- header -->
           <div class="flex justify-between">
-            <h2 class="font-semibold text-xl mb-2">Today's weather details</h2>
+            <h2 class="font-semibold text-lg md:text-xl mb-2">
+              Today's weather details
+            </h2>
             <!-- Buttons -->
             <div class="inline-flex bg-green-100 rounded-full">
               <button
                 id="unit_C"
-                class="px-6 py-2 rounded-full text-white bg-green-600"
+                class="px-3 py-1 md:px-6 md:py-2 rounded-full text-white bg-green-600"
               >
                 C
               </button>
-              <button id="unit_F" class="px-6 py-2 rounded-full text-green-600">
+              <button
+                id="unit_F"
+                class="px-3 py-1 md:px-6 md:py-2 rounded-full text-green-600"
+              >
                 F
               </button>
             </div>
           </div>
           <!-- Weather Details -->
-          <div class="flex flex-col px-10">
+          <div class="flex flex-col px-3 gap-y-2 md:px-10">
             <!-- Thermal Sensation -->
             <div
               class="flex justify-between items-center py-3 border-black border-b-[2px]"
@@ -87,12 +94,15 @@
               <div class="flex items-center">
                 <img
                   src="473ffac0bc4294dc470b.svg"
-                  class="h-10 w-10"
+                  class="size-5 md:size-10"
                   alt="Thermometer"
                 />
-                <div class="font-semibold ml-2 text-lg">Feels Like</div>
+                <div class="font-semibold ml-2 md:text-lg">Feels Like</div>
               </div>
-              <div class="font-semibold text-lg" id="todayTemp"></div>
+              <div
+                class="font-semibold text-md md:text-lg"
+                id="todayTemp"
+              ></div>
             </div>
             <!-- Rain Probability -->
             <div
@@ -101,36 +111,42 @@
               <div class="flex items-center">
                 <img
                   src="105e4d8334493ba05685.svg"
-                  class="h-10 w-10"
+                  class="size-5 md:size-10"
                   alt="Rain"
                 />
-                <div class="font-semibold ml-2 text-lg">Rain Probability</div>
+                <div class="font-semibold ml-2 md:text-lg">
+                  Rain Probability
+                </div>
               </div>
-              <div class="font-semibold text-lg" id="rainProp"></div>
+              <div class="font-semibold text-md md:text-lg" id="rainProp"></div>
             </div>
             <!-- Wind Speed -->
             <div
               class="flex justify-between items-center py-3 border-black border-b-[2px]"
             >
               <div class="flex items-center">
-                <img src="9a5e68987c5e27b759b6.svg" class="h-10 w-10" alt="Wind" />
-                <div class="font-semibold ml-2 text-lg">Wind Speed</div>
+                <img
+                  src="9a5e68987c5e27b759b6.svg"
+                  class="size-5 md:size-10"
+                  alt="Wind"
+                />
+                <div class="font-semibold ml-2 md:text-lg">Wind Speed</div>
               </div>
-              <div class="font-semibold text-lg" id="wind"></div>
+              <div class="font-semibold md:text-lg" id="wind"></div>
             </div>
-            <!-- Air Humidity -->
+            <!-- Air Humidity-->
             <div
               class="flex justify-between items-center py-3 border-black border-b-[2px]"
             >
               <div class="flex items-center">
                 <img
                   src="2807e2cf293d432ea09d.svg"
-                  class="h-10 w-10"
+                  class="size-5 md:size-10"
                   alt="Humidity"
                 />
-                <div class="font-semibold ml-2 text-lg">Air Humidity</div>
+                <div class="font-semibold ml-2 md:text-lg">Air Humidity</div>
               </div>
-              <div class="font-semibold text-lg" id="airHumidity"></div>
+              <div class="font-semibold md:text-lg" id="airHumidity"></div>
             </div>
             <!-- UV index -->
             <div
@@ -139,23 +155,25 @@
               <div class="flex items-center">
                 <img
                   src="83fa0c9fe1ff51982b36.svg"
-                  class="h-10 w-10"
+                  class="size-5 md:size-10"
                   alt="UV Index"
                 />
-                <div class="font-semibold ml-2 text-lg">UV index</div>
+                <div class="font-semibold ml-2 md:text-lg">UV index</div>
               </div>
-              <div class="font-semibold text-lg" id="UVindex"></div>
+              <div class="font-semibold md:text-lg" id="UVindex"></div>
             </div>
           </div>
         </div>
       </section>
       <!-- Bottom Container -->
       <section
-        class="mt-5 bg-gradient-to-t from-cyan-600 to-gray-400 rounded-md p-3"
+        class="mt-5 bg-gradient-to-t from-cyan-600 to-gray-400 rounded-md p-3 w-80 md:min-w-full"
       >
-        <h2 class="font-semibold mb-5 text-xl">Forecast for the next 7 days</h2>
+        <h2 class="font-semibold mb-5 text-lg md:text-xl">
+          Forecast for the next 7 days
+        </h2>
         <!-- Next 7 days' Weather -->
-        <div class="flex" id="container"></div>
+        <div class="flex overflow-x-auto gap-x-5" id="container"></div>
       </section>
     </main>
   </body>
