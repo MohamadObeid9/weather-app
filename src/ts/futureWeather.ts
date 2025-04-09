@@ -23,7 +23,7 @@ export const futureWeather = (data: weatherData) => {
         minMaxTemp.textContent =
           data.days[index].tempmax +
           "°F" +
-          "/" +
+          " / " +
           data.days[index].tempmin +
           "°F";
       } else {
@@ -32,7 +32,7 @@ export const futureWeather = (data: weatherData) => {
         minMaxTemp.textContent =
           newFromulaMax.toFixed(1) +
           "°C" +
-          "/" +
+          " / " +
           newFromulaMin.toFixed(1) +
           "°C";
       }
@@ -44,12 +44,14 @@ export const futureWeather = (data: weatherData) => {
         "flex",
         "flex-col",
         "items-center",
-        "justify-between"
+        "justify-between",
+        "min-w-32",
+
       );
       outerContainer.appendChild(innerContainer);
 
       const day = document.createElement("div");
-      day.classList.add("font-semibold", "text-xl");
+      day.classList.add("text-lg", "md:text-xl");
       day.textContent = weekDays[new Date(data.days[i].datetime).getDay()];
       innerContainer.appendChild(day);
 
@@ -58,13 +60,13 @@ export const futureWeather = (data: weatherData) => {
       innerContainer.appendChild(img);
 
       const condition = document.createElement("div");
-      condition.classList.add("font-semibold", "mb-2", "text-sm");
+      condition.classList.add("mb-2", "text-sm");
       condition.textContent = data.days[i].conditions;
       innerContainer.appendChild(condition);
 
       const minMaxTemp = document.createElement("div");
       minMaxTemp.id = `minMaxTemp${i}`;
-      minMaxTemp.classList.add("text-sm", "tracking-wide", "font-semibold");
+      minMaxTemp.classList.add("text-sm", "tracking-wide","font-semibold");
       innerContainer.appendChild(minMaxTemp);
       updateTemperature("C", i);
     }
